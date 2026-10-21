@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "300311544366",
+    "project_id": "aegis-iot-6b4d3",
+    "storage_bucket": "aegis-iot-6b4d3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300311544366:android:b468488561fec62a9715bf",
+        "android_client_info": {
+          "package_name": "com.example.aegis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyav0peOkFAtOiIRgr5CZ3VgQiPsDlqqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
