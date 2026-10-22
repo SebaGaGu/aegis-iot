@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +33,17 @@ public class LoginActivity extends AppCompatActivity {
 
         // Cuando pulso el boton, intento iniciar sesion
         btnIniciarSesion.setOnClickListener(v -> iniciarSesion());
+
+        // Cuando pulso "Registrate", abro la pantalla de registro
+        TextView tvRegistrarse = findViewById(R.id.tvRegistrarse);
+
+        tvRegistrarse.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    LoginActivity.this,
+                    RegistroActivity.class
+            );
+            startActivity(intent);
+        });
     }
 
     private void iniciarSesion() {

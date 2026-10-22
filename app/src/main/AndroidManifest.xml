@@ -21,6 +21,12 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <!-- Pantalla para crear una cuenta de usuario -->
+        <activity
+            android:name=".RegistroActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
         <!-- Pantalla de inicio de sesion de AEGIS -->
         <activity
             android:name=".LoginActivity"
