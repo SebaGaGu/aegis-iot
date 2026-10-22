@@ -12,7 +12,20 @@
           "package_name": "com.example.aegis"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "300311544366-2gd9l1vrtrbmqevub4edjodqk21chdnm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aegis",
+            "certificate_hash": "2a08d5696c10cd9da79e4f138338db6c1ba32018"
+          }
+        },
+        {
+          "client_id": "300311544366-8o77nc56e0m9b5aqo48jf6f0qjeh7mtv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAyav0peOkFAtOiIRgr5CZ3VgQiPsDlqqI"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300311544366-8o77nc56e0m9b5aqo48jf6f0qjeh7mtv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
