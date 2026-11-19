@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.aegis.deteccion_golpes.Deteccion_golpes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -20,6 +21,7 @@ public class CuentaActivity extends AppCompatActivity {
 
     private Button btnConectarMaleta;
     private Button btnCerrarSesion;
+    private Button btnGolpes;
 
     // Firebase Authentication
     private FirebaseAuth auth;
@@ -36,6 +38,7 @@ public class CuentaActivity extends AppCompatActivity {
 
         btnConectarMaleta = findViewById(R.id.btnConectarMaleta);
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+        btnGolpes = findViewById(R.id.golpes);
 
         // Inicializo Firebase
         auth = FirebaseAuth.getInstance();
@@ -48,6 +51,9 @@ public class CuentaActivity extends AppCompatActivity {
 
         // Cuando pulso cerrar sesion
         btnCerrarSesion.setOnClickListener(v -> cerrarSesion());
+
+        // Cuando pulso Historial Detecciones
+        btnGolpes.setOnClickListener(v -> onClickDeteccionHistorial());
     }
 
 
@@ -157,5 +163,10 @@ public class CuentaActivity extends AppCompatActivity {
 
         startActivity(intent);
         finish();
+    }
+
+    public void onClickDeteccionHistorial(){
+        Intent intent = new Intent(this, Deteccion_golpes.class);
+        startActivity(intent);
     }
 }

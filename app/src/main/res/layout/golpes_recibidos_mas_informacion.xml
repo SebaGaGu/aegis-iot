@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="99dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/maleta_verde" />
+
+    <ImageView
+        android:id="@+id/boton_cerrar_btnINF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/boton_cancelar" />
+
+    <!-- Texto Fecha -->
+    <TextView
+        android:id="@+id/fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:text="Fecha: 20/10/2026"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <!-- Texto Hora -->
+    <TextView
+        android:id="@+id/hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Hora: 12:00"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/fecha"
+        app:layout_constraintTop_toBottomOf="@+id/fecha" />
+
+    <!-- Texto Ubicación -->
+    <TextView
+        android:id="@+id/textViewUbicacionTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Ubicacion:"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/hora"
+        app:layout_constraintTop_toBottomOf="@+id/hora" />
+
+    <!-- Fragmento del Mapa de Google -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textViewUbicacionTitulo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUbicacionTitulo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

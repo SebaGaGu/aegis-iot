@@ -45,42 +45,103 @@ public class Deteccion_golpes extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        // Cargar golpes indicando el ID de la maleta (ej: "Maleta 2")
-        cargarGolpesFirebase("Maleta 2");
-
-
+        cargarGolpesFirebase();
     }
 
-    private void cargarGolpesFirebase(String idMaleta) {
+    private void cargarGolpesFirebase() {
         FirebaseUser usuarioActual = auth.getCurrentUser();
-        if (usuarioActual == null) return;
+        if (usuarioActual == null) {
+            Log.e("Deteccion_golpes", "No hay usuario autenticado.");
+            return;
+        }
 
         String uid = usuarioActual.getUid();
+        Log.d("Deteccion_golpes", "UID del usuario actual: " + uid);
 
-        // Ruta: Usuarios -> {UUID} -> Maletas -> {idMaleta} -> Sensores -> Sensor tilt -> Historial_golpes
+        // Ruta permitida por reglas de seguridad: Usuarios / {UID} / Maletas
         db.collection("Usuarios")
                 .document(uid)
                 .collection("Maletas")
-                .document(idMaleta)
-                .collection("Sensores")
-                .document("Sensor tilt")
-                .collection("Historial_golpes")
+                .addSnapshotListener((maletasSnapshots, errorMaletas) -> {
+                    if (errorMaletas != null) {
+                        Log.e("Deteccion_golpes", "Error al consultar maletas: ", errorMaletas);
+                        // Si falla por ruta específica, intentamos por collectionGroup
+                        cargarPorCollectionGroup();
+                        return;
+                    }
+
+                    if (maletasSnapshots != null && !maletasSnapshots.isEmpty()) {
+                        Log.d("Deteccion_golpes", "Maletas encontradas: " + maletasSnapshots.size());
+                        for (DocumentSnapshot maletaDoc : maletasSnapshots.getDocuments()) {
+                            String idMaleta = maletaDoc.getId();
+
+                            // Escuchamos el Historial_golpes de Sensor_Tilt para cada maleta
+                            db.collection("Usuarios")
+                                    .document(uid)
+                                    .collection("Maletas")
+                                    .document(idMaleta)
+                                    .collection("Sensores")
+                                    .document("Sensor_Tilt")
+                                    .collection("Historial_golpes")
+                                    .addSnapshotListener((golpesSnapshots, errorGolpes) -> {
+                                        if (errorGolpes != null) {
+                                            Log.e("Deteccion_golpes", "Error al consultar golpes: ", errorGolpes);
+                                            return;
+                                        }
+
+                                        if (golpesSnapshots != null) {
+                                            Log.d("Deteccion_golpes", "Golpes recibidos: " + golpesSnapshots.size());
+                                            golpes.clear();
+                                            for (DocumentSnapshot doc : golpesSnapshots.getDocuments()) {
+                                                try {
+                                                    Golpes golpe = doc.toObject(Golpes.class);
+                                                    if (golpe != null) {
+                                                        golpe.setId(doc.getId());
+                                                        golpes.add(golpe);
+                                                    }
+                                                } catch (Exception e) {
+                                                    Log.e("Deteccion_golpes", "Error procesando golpe " + doc.getId(), e);
+                                                }
+                                            }
+                                            adaptadorGolpes.notifyDataSetChanged();
+                                        }
+                                    });
+                        }
+                    } else {
+                        Log.d("Deteccion_golpes", "No se encontraron maletas directamente, usando respaldo...");
+                        cargarPorCollectionGroup();
+                    }
+                });
+    }
+
+    private void cargarPorCollectionGroup() {
+        db.collectionGroup("Historial_golpes")
                 .addSnapshotListener((queryDocumentSnapshots, error) -> {
                     if (error != null) {
-                        Log.e("Deteccion_golpes", "Error al consultar la BBDD", error);
+                        Log.e("Deteccion_golpes", "Error en collectionGroup: ", error);
                         return;
                     }
 
                     if (queryDocumentSnapshots != null) {
                         golpes.clear();
                         for (DocumentSnapshot doc : queryDocumentSnapshots.getDocuments()) {
-                            Golpes golpe = doc.toObject(Golpes.class);
-                            if (golpe != null) {
-                                golpe.setId(doc.getId());
-                                golpes.add(golpe);
+
+
+
+
+
+
+
+                            try {
+                                Golpes golpe = doc.toObject(Golpes.class);
+                                if (golpe != null) {
+                                    golpe.setId(doc.getId());
+                                    golpes.add(golpe);
+                                }
+                            } catch (Exception e) {
+                                Log.e("Deteccion_golpes", "Error procesando golpe " + doc.getId(), e);
                             }
                         }
-
                         adaptadorGolpes.notifyDataSetChanged();
                     }
                 });

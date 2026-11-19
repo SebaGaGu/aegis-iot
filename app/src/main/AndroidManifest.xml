@@ -46,14 +46,15 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".deteccion_golpes.AplicacionRecyclerView"
+            android:name=".deteccion_golpes.Deteccion_golpes"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".deteccion_golpes.Deteccion_golpes"
+            android:name=".deteccion_golpes.Maps"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:label="Detalles del Golpe"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
             tools:ignore="Instantiatable" />
 
     </application>

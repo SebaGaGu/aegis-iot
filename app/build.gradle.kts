@@ -43,6 +43,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.android.gms:play-services-maps:19.1.0")
 
     // Librerias para iniciar sesion con Google
     implementation("androidx.credentials:credentials:1.6.0")

@@ -1,5 +1,7 @@
 package com.example.aegis.deteccion_golpes;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +61,20 @@ public class AdaptadorGolpes extends RecyclerView.Adapter<AdaptadorGolpes.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int posicion) {
         Golpes golpe = listaGolpes.get(posicion);
         holder.personaliza(golpe);
+
+        // Al hacer clic en el botón "Más información" del item del RecyclerView:
+        holder.btnMasInformacion.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, Maps.class);
+
+            // Pasamos los datos del golpe recuperados de la BBDD
+            intent.putExtra("fecha", golpe.getFecha());
+            intent.putExtra("hora", golpe.getHora());
+            intent.putExtra("fuerza", golpe.getFuerza());
+            intent.putExtra("latitud", golpe.getLatitud());
+            intent.putExtra("longitud", golpe.getLongitud());
+            context.startActivity(intent);
+        });
     }
 
     // Indicamos el número de elementos en la lista
