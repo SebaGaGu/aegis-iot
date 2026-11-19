@@ -1,12 +1,11 @@
 package com.example.aegis.deteccion_golpes;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aegis.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -16,7 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Maps extends FragmentActivity implements OnMapReadyCallback {
+public class Maps extends AppCompatActivity implements OnMapReadyCallback {
 
     private double latitud = 0.0;
     private double longitud = 0.0;
@@ -26,11 +25,14 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.golpes_recibidos_mas_informacion);
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView btnCerrar = findViewById(R.id.boton_cerrar_btnINF);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"})TextView tvFecha = findViewById(R.id.fecha);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"})TextView tvHora = findViewById(R.id.hora);
+        // Al pulsar fuera o en la X, solo se cierra este popup (Maps), sin cerrar Deteccion_golpes
+        setFinishOnTouchOutside(true);
 
-        // Cerrar el popup al pulsar la X
+        ImageView btnCerrar = findViewById(R.id.boton_cerrar_btnINF);
+        TextView tvFecha = findViewById(R.id.fecha);
+        TextView tvHora = findViewById(R.id.hora);
+
+        // Cerrar únicamente este popup al pulsar la X
         btnCerrar.setOnClickListener(v -> finish());
 
         // Recibir los valores del Intent
@@ -56,7 +58,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        // Posicionar en latitud y longitud
+        // Posicionar en latitud y longitud recibidas
         LatLng posicionImpacto = new LatLng(latitud, longitud);
         googleMap.addMarker(new MarkerOptions()
                 .position(posicionImpacto)

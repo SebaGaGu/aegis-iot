@@ -16,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AEGIS">
 
+        <!-- Meta-data necesario para Google Maps -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDkTxUmuo1BXflBBqtj0_oK2y17J2xTR0E" />
+
         <!-- Pantalla principal que se abre despues del login -->
         <activity
             android:name=".MainActivity"
