@@ -44,6 +44,17 @@
             android:name=".CuentaActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".deteccion_golpes.AplicacionRecyclerView"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".deteccion_golpes.Deteccion_golpes"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            tools:ignore="Instantiatable" />
+
     </application>
 
 </manifest>
