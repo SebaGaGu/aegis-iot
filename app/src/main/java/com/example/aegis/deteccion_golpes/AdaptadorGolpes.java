@@ -16,7 +16,7 @@ import java.util.List;
 
 public class AdaptadorGolpes extends RecyclerView.Adapter<AdaptadorGolpes.ViewHolder> {
 
-    protected List<Golpes> listaGolpes; // Lista de golpes a mostrar
+    protected List<Golpes> listaGolpes;
 
     public AdaptadorGolpes(List<Golpes> listaGolpes) {
         this.listaGolpes = listaGolpes;

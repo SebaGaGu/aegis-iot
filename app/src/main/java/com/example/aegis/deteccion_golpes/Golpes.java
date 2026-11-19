@@ -16,6 +16,10 @@ public class Golpes {
         this.longitud = longitud;
     }
 
+    public Golpes(){
+
+    }
+
     public String getId() {
         return id;
     }
